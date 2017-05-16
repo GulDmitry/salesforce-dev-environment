@@ -1,0 +1,21 @@
+version: '3'
+services:
+  cumulus:
+    build: ./docker/cumulusCI
+    container_name: sde-cumulus
+    volumes:
+      - /var/www/salesforce-demo-prod/:/root
+    command: cci
+    environment:
+        - CUMULUSCI_KEY=2c5409bbc5ea321b # Must be 16
+    networks:
+      base_net:
+        ipv4_address: 172.16.238.10
+
+networks:
+  base_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
