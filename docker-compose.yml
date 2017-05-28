@@ -3,6 +3,8 @@ services:
   cumulus:
     build: ./docker/cumulusCI
     container_name: sde-cumulus
+    ports:
+      - 8080:8080
     volumes:
       - /var/www/salesforce-demo-prod/:/root
     command: cci

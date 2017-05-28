@@ -1,6 +1,8 @@
 FROM debian:jessie
 
 RUN apt-get update && apt-get install -y \
+    telnet \
+    curl \
     wget \
     build-essential \
     libssl-dev \
@@ -12,6 +14,7 @@ RUN python get-pip.py
 RUN apt-get install -y python-pip
 
 RUN pip install cryptography
+RUN pip install http
 
 RUN pip install --pre cumulusci
 
