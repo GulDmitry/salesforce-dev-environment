@@ -14,7 +14,7 @@ Change the volume in `docker-compose.yml`.
 Init new project:
 `docker-compose run cumulus cci project init`
 
-Create a [Connected App](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-3-connecting-salesforce-orgs)
+Create a [Connected App](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-3-connecting-salesforce-orgs) and select `Refresh token is valid until revoked` in order to prevent token expiration.
 
 Configure the App:
 `docker-compose run cumulus cci org config_connected_app`
@@ -42,3 +42,33 @@ Workaround:
 * Find out why opening `http://localhost:8080/callback` with exposed `8080` does not reach the container.
 ** Neither of `localhost`, `172.16.238.10`, `127.0.0.1', `0.0.0.0` works.
 * Insert a flow diagram from Gliffy.
+
+### Recomended Meta to Sync
+* ApexClass
+* ApexComponent
+* ApexPage
+* ApexTrigger
+* CustomApplication
+* CustomLabels
+* CustomObjectTranslation
+* CustomPageWebLink
+* CustomSite
+* CustomTab
+* DataCategoryGroup
+* FieldSet
+* Flow
+* Group
+* HomePageComponent
+* HomePageLayout
+* Layout
+* PermissionSet
+* Portal
+* Profile
+* Queue
+* RecordType
+* RemoteSiteSetting
+* ReportType
+* Role
+* Scontrol
+* Workflow
+* StaticResource
