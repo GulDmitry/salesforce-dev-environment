@@ -28,6 +28,13 @@ Workaround:
 
 `docker-compose run cumulus cci org default prod`
 
+### GIT flow
+* Make a new `prod` repository.
+* Download required meta into `src` folder and push.
+* Make a new `dev` org.
+* Clone the repository.
+* Follow `src/package.xml`, deploy the metadata to `dev` Force.com.
+
 ## Demo
 * Register two orgs: `dev` and `prod`.
 * [Connect](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-3-connecting-salesforce-orgs) the orsg.
