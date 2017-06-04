@@ -1,0 +1,6 @@
+project:
+    name: Salesforce Skeleton
+    package:
+        name: Test Package
+        namespace: demonamespace
+        api_version: 39.0

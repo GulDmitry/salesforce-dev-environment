@@ -41,7 +41,38 @@ Execute apex:
 * Clone the repository.
 * Follow `src/package.xml`, deploy the metadata to `dev` Force.com.
 * Make changes and a pull request.
+  * Populate `src/package.xml` with new data, example for class, test and new object:
+      ```
+      src/classes/TestClass.cls
+      src/classes/TestClass.cls-meta.xml
+      src/classes/TestClassTest.cls
+      src/classes/TestClassTest.cls-meta.xml
+      src/objectTranslations/New_Object__c-en_US.objectTranslation
+      src/objects/New_Object__c.object
+      src/layouts/New_Object__c-New Object Layout.layout
+      ```
+      ```xml
+      <types>
+            <members>TestClass</members>
+            <members>TestClassTest</members>
+            <name>ApexClass</name>
+        </types>
+        <types>
+            <members>New_Object__c</members>
+            <name>CustomObject</name>
+        </types>
+        <types>
+            <members>New_Object__c-en_US</members>
+            <name>CustomObjectTranslation</name>
+        </types>
+        <types>
+            <members>New_Object__c-New Object Layout</members>
+            <name>Layout</name>
+        </types>
+    ```
 * CI: run task and check the files `project/test_results.json`, `project/test_results.xml`.
+  * No parallel executing in case of one CI org.
+  * Can deploy the PR to a test org, or developer's can be provided for QA.
 * Merge if all tests pass.
 * Deploy on org(s).
 
