@@ -1,0 +1,5 @@
+pipeline:
+  backend:
+    image: golang
+    commands:
+      - pwd

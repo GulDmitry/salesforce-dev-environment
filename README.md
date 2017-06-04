@@ -121,3 +121,6 @@ Execute apex:
 * Scontrol
 * Workflow
 * StaticResource
+
+## [Drone CI](http://docs.drone.io)
+* Configured for [Bitbucket Cloud](http://docs.drone.io/install-for-bitbucket-cloud/)

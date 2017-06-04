@@ -1,6 +1,7 @@
 FROM debian:jessie
 
 RUN apt-get update && apt-get install -y \
+    rsync \
     telnet \
     curl \
     wget \
@@ -14,7 +15,7 @@ RUN python get-pip.py
 RUN apt-get install -y python-pip
 
 RUN pip install cryptography
-# TypeError: data must be a byte string
+# TypeError: data must be a byte string.
 RUN pip install 'requests[security]'
 
 RUN pip install http
