@@ -5,7 +5,6 @@ First try to set up an environment for Salesforce.
 * [docker-compose](https://docs.docker.com/compose/)
 * [cumulusci docks](http://cumulusci.readthedocs.io/en/latest/tutorial.html)
 
-
 Override default command:
 `docker-compose run cumulus cci`
 
@@ -28,12 +27,23 @@ Workaround:
 
 `docker-compose run cumulus cci org default prod`
 
-### GIT flow
+### [Running Tasks](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-4-running-tasks)
+Execute apex:
+`docker-compose run cumulus cci task run execute_anon -o apex 'System.debug(1);'`
+[Flow](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-5-flows) info:
+`docker-compose run cumulus cci flow info ci_feature`
+`docker-compose run cumulus cci flow run ci_feature`
+
+### GIT Flow
 * Make a new `prod` repository.
-* Download required meta into `src` folder and push.
+* Add a `package.xml` und empty`src` folder.
 * Make a new `dev` org.
 * Clone the repository.
 * Follow `src/package.xml`, deploy the metadata to `dev` Force.com.
+* Make changes and a pull request.
+* CI: run task and check the files `project/test_results.json`, `project/test_results.xml`.
+* Merge if all tests pass.
+* Deploy on org(s).
 
 ## Demo
 * Register two orgs: `dev` and `prod`.
@@ -50,11 +60,12 @@ Workaround:
 ** Neither of `localhost`, `172.16.238.10`, `127.0.0.1', `0.0.0.0` works.
 * Insert a flow diagram from Gliffy.
 
-### Recomended Meta to Sync
+### Recommended Meta To Sync
 * ApexClass
 * ApexComponent
 * ApexPage
 * ApexTrigger
+* AuraDefinitionBundle
 * CustomApplication
 * CustomLabels
 * CustomObjectTranslation
