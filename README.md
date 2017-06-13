@@ -76,21 +76,6 @@ Execute apex:
 * Merge if all tests pass.
 * Deploy on org(s).
 
-## Demo
-* Register two orgs: `dev` and `prod`.
-* [Connect](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-3-connecting-salesforce-orgs) the orsg.
-* Create a repository.
-** Developer makes a fork.
-* Commit meta for `prod`.
-* Load the meta to `dev`.
-* Make a PR to `prod`.
-* Deploy the data.
-
-### TODO
-* Find out why opening `http://localhost:8080/callback` with exposed `8080` does not reach the container.
-** Neither of `localhost`, `172.16.238.10`, `127.0.0.1', `0.0.0.0` works.
-* Insert a flow diagram from Gliffy.
-
 ### Recommended Meta To Sync
 * ApexClass
 * ApexComponent
@@ -122,5 +107,29 @@ Execute apex:
 * Workflow
 * StaticResource
 
-## [Drone CI](http://docs.drone.io)
-* Configured for [Bitbucket Cloud](http://docs.drone.io/install-for-bitbucket-cloud/)
+## Demo
+* Register two orgs: `dev` and `prod`.
+* [Connect](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-3-connecting-salesforce-orgs) the orsg.
+* Create a repository `prod`.
+  * Developer makes a fork.
+* Commit initial data.
+* Clone the repository `dev`.
+* Make a PR to `prod`.
+* Deploy the data.
+* Run drone CI `docker-compose -f docker-compose-drone.yml up`.
+* Check the build.
+
+## Setup [Drone CI](http://docs.drone.io)
+* Configuration for [Bitbucket Cloud](http://docs.drone.io/install-for-bitbucket-cloud/)
+* [ngrok](https://ngrok.com/) can be used for testing on localhost.
+  * `./ngrok http 8081`
+  * Set `DRONE_HOST` in `.env` like `http://{ngrok-hash}.ngrok.io`.
+* Activate a repository.
+* Enable Push and\or Pull request hooks.
+* The docker/cumulusCI image is available as `guldmitry/cumulusci`.
+* Add `CUMULUSCI_KEY` in the `Secrets` section for the activated repository.
+
+### TODO
+* Find out why opening `http://localhost:8080/callback` with exposed `8080` does not reach the container.
+** Neither of `localhost`, `172.16.238.10`, `127.0.0.1', `0.0.0.0` works.
+* Insert a flow diagram from Gliffy.

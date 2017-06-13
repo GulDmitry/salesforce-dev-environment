@@ -1,5 +1,9 @@
 pipeline:
   backend:
-    image: golang
+    image: guldmitry/cumulusci:0.1
+#    Set that in the `Secrets` section of activated repository in agent.
+    secrets: [ cumulusci_key ]
     commands:
-      - pwd
+#    Because of `WORKDIR /root` in the image
+      - rsync -av --progress . /root --exclude .git
+      - cci org info prod
