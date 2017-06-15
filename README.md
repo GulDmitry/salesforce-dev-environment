@@ -2,8 +2,8 @@
 First try to set up an environment for Salesforce.
 
 * [Docker](https://www.docker.com/)
-* [docker-compose](https://docs.docker.com/compose/)
-* [cumulusci docks](http://cumulusci.readthedocs.io/en/latest/tutorial.html)
+* [Docker-compose](https://docs.docker.com/compose/)
+* [Cumulusci docks](http://cumulusci.readthedocs.io/en/latest/tutorial.html)
 
 Override default command:
 `docker-compose run cumulus cci`
@@ -20,18 +20,22 @@ Configure the App:
 
 Connecting an Org (prod):
 `docker-compose run -p 8080:8080 cumulus cci org connect prod`
+
 Or workaround in case of bridge network:
-`docker-compose run -p 8080:8080 cumulus bash`
-`cci org connect prod &`
-`curl -XGET {callback URL with token}`
+* `docker-compose run -p 8080:8080 cumulus bash`
+* `cci org connect prod &`
+* `curl -XGET {callback URL with token}`
 
 `docker-compose run cumulus cci org default prod`
 
 ### [Running Tasks](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-4-running-tasks)
 Execute apex:
 `docker-compose run cumulus cci task run execute_anon -o apex 'System.debug(1);'`
+
 [Flow](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-5-flows) info:
+
 `docker-compose run cumulus cci flow info ci_feature`
+
 `docker-compose run cumulus cci flow run ci_feature`
 
 ### GIT Flow
