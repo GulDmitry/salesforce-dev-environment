@@ -18,9 +18,9 @@ Create a [Connected App](http://cumulusci.readthedocs.io/en/latest/tutorial.html
 Configure the App:
 `docker-compose run cumulus cci org config_connected_app`
 
-~~Connecting an Org (prod):~~
-~~`docker-compose run -p 8080:8080 cumulus cci org connect prod`~~
-Workaround:
+Connecting an Org (prod):
+`docker-compose run -p 8080:8080 cumulus cci org connect prod`
+Or workaround in case of bridge network:
 `docker-compose run -p 8080:8080 cumulus bash`
 `cci org connect prod &`
 `curl -XGET {callback URL with token}`
@@ -130,6 +130,4 @@ Execute apex:
 * Add `CUMULUSCI_KEY` in the `Secrets` section for the activated repository.
 
 ### TODO
-* Find out why opening `http://localhost:8080/callback` with exposed `8080` does not reach the container.
-** Neither of `localhost`, `172.16.238.10`, `127.0.0.1', `0.0.0.0` works.
 * Insert a flow diagram from Gliffy.
