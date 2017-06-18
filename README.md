@@ -135,3 +135,9 @@ Execute apex:
 
 ### TODO
 * Insert a flow diagram from Gliffy.
+* Linters: PMD apex, salesforce CI, eslint for lightning, 
+* CI org uninstall.
+* Demo data\fixtures.
+* Try to register a dev org automatically.
+* Custom labels.
+* Update 
