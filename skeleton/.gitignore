@@ -2,3 +2,4 @@
 *.iws
 IlluminatedCloud/
 *.iml
+test_results.*

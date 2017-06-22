@@ -1,9 +1,13 @@
 pipeline:
   backend:
     image: guldmitry/cumulusci:0.1
-#    Set that in the `Secrets` section of activated repository in agent.
+    # Set that in the `Secrets` section of activated repository in agent.
     secrets: [ cumulusci_key ]
     commands:
-#    Because of `WORKDIR /root` in the image
+      # Because of `WORKDIR /root` in the image
       - rsync -av --progress . /root --exclude .git
-      - cci org info prod
+      # Add `--org {org_name}` in order not to use default org.
+      # Uninstall all components from the package made by `ci_master`.
+      - cci task run uninstall_packaged
+      - cci flow run ci_master
+      - cci task run run_tests_debug

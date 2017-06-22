@@ -134,6 +134,7 @@ Execute apex:
 * Add `CUMULUSCI_KEY` in the `Secrets` section for the activated repository.
 
 ### TODO
+* Deploy on Production workflow.
 * Insert a flow diagram from Gliffy.
 * Linters: PMD apex, salesforce CI, eslint for lightning, 
 * CI org uninstall.
