@@ -56,10 +56,14 @@ Execute apex:
       src/layouts/New_Object__c-New Object Layout.layout
       ```
       ```xml
-      <types>
+        <types>
             <members>TestClass</members>
             <members>TestClassTest</members>
             <name>ApexClass</name>
+        </types>
+        <types>
+            <members>New_Object__c.String__c</members>
+            <name>CustomField</name>
         </types>
         <types>
             <members>New_Object__c</members>
@@ -74,7 +78,7 @@ Execute apex:
             <name>Layout</name>
         </types>
     ```
-* CI: run task and check the files `project/test_results.json`, `project/test_results.xml`.
+* [CI](http://cumulusci.readthedocs.io/en/latest/cookbook.html#continuous-integration-with-cumulusci): run task and check the files `project/test_results.json`, `project/test_results.xml`.
   * No parallel executing in case of one CI org.
   * Can deploy the PR to a test org, or developer's can be provided for QA.
 * Merge if all tests pass.
@@ -135,10 +139,29 @@ Execute apex:
 
 ### TODO
 * Deploy on Production workflow.
+  * cci flow run ci_master --org prod
+  * cci task run run_tests_debug
+  * Currently all release and install flows requires git and falls with
+  * Expected to find encrypted file at /root/.cumulusci/Salesforce_Demo_Production/github.org
+  * cci flow run release_beta --org prod
+  * {u'errorCode': u'INVALID_TYPE', u'message': u"sObject type 'MetadataPackage' is not supported."}
 * Insert a flow diagram from Gliffy.
 * Linters: PMD apex, salesforce CI, eslint for lightning, 
-* CI org uninstall.
-* Demo data\fixtures.
+* Demo data\fixtures via anon apex code.
 * Try to register a dev org automatically.
-* Custom labels.
-* Update 
+
+#### Commit meta
+- [x] Custom Object.
+- [x] Custom fields for Custom Object.
+- [x] Apex Class and Test.
+- [ ] Custom Labels.
+- [ ] Custom Settings.
+- [ ] Update Layout.
+- [ ] Lightning App.
+- [ ] Lightning Controller.
+- [ ] One App.
+- [ ] Validation Rule.
+- [ ] Lookup Filter.
+- [ ] Master-Detail.
+- [ ] Lookup.
+- [ ] Workflow.

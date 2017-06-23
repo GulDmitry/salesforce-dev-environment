@@ -3,4 +3,4 @@ project:
     package:
         name: Test Package
         namespace: demonamespace
-        api_version: 39.0
+        api_version: 40.0

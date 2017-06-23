@@ -6,8 +6,5 @@ pipeline:
     commands:
       # Because of `WORKDIR /root` in the image
       - rsync -av --progress . /root --exclude .git
-      # Add `--org {org_name}` in order not to use default org.
-      # Uninstall all components from the package made by `ci_master`.
-      - cci task run uninstall_packaged
-      - cci flow run ci_master
-      - cci task run run_tests_debug
+      # No need to delete previous meta.
+      - cci flow run ci_feature
