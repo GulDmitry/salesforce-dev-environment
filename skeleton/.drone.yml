@@ -5,10 +5,22 @@ workspace:
   path: /
 
 pipeline:
-  backend:
+  ci:
     image: guldmitry/cumulusci:0.1
     # Set that in the `Secrets` section of activated repository in agent.
     secrets: [ cumulusci_key ]
     commands:
       # No need to delete previous meta.
       - cci flow run ci_feature
+    when:
+      branch:
+        exclude: master
+
+  prod:
+    image: guldmitry/cumulusci:0.1
+    secrets: [ cumulusci_key ]
+    commands:
+      - cci flow run ci_master
+      - cci flow run release_beta
+    when:
+      branch: master
