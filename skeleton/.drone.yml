@@ -1,10 +1,14 @@
+# Because of `WORKDIR /root` in the image
+# Or `- rsync -av --progress . /root --exclude .git` as a command.
+workspace:
+  base: /root
+  path: /
+
 pipeline:
   backend:
     image: guldmitry/cumulusci:0.1
     # Set that in the `Secrets` section of activated repository in agent.
     secrets: [ cumulusci_key ]
     commands:
-      # Because of `WORKDIR /root` in the image
-      - rsync -av --progress . /root --exclude .git
       # No need to delete previous meta.
       - cci flow run ci_feature
