@@ -21,6 +21,7 @@ pipeline:
     secrets: [ cumulusci_key ]
     commands:
       - cci flow run ci_master
-      - cci flow run release_beta
+      # https://github.com/SalesforceFoundation/CumulusCI/issues/209
+      # - cci flow run release_beta
     when:
       branch: master
