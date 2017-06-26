@@ -133,7 +133,8 @@ Execute apex:
   * `./ngrok http 8081`
   * Set `DRONE_HOST` in `.env` like `http://{ngrok-hash}.ngrok.io`.
 * Activate a repository.
-* Enable Push and\or Pull request hooks.
+* Enable Push and\or Pull request hooks in CI setting.
+* Check created repository hook and add PR support on Create and Update.
 * The docker/cumulusCI image is available as `guldmitry/cumulusci`.
 * Add `CUMULUSCI_KEY` in the `Secrets` section for the activated repository.
 

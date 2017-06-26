@@ -13,8 +13,10 @@ pipeline:
       # No need to delete previous meta.
       - cci flow run ci_feature
     when:
-      branch:
-        exclude: master
+      # Do not forget to enable pr event in repo hooks.
+      event: [ pull_request ]
+      # PR against master.
+      branch: master
 
   prod:
     image: guldmitry/cumulusci:0.1
@@ -24,4 +26,5 @@ pipeline:
       # https://github.com/SalesforceFoundation/CumulusCI/issues/209
       # - cci flow run release_beta
     when:
+      event: [ push, tag, deployment ]
       branch: master
