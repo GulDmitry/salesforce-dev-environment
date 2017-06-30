@@ -39,8 +39,7 @@ Execute apex:
 `docker-compose run cumulus cci flow run ci_feature`
 
 ### GIT Flow
-* Make a new `prod` repository.
-* Add a `package.xml` und empty`src` folder.
+* Make a new `prod` repository based on `sleketon`.
 * Make a new `dev` org.
 * Clone the repository.
 * Follow `src/package.xml`, deploy the metadata to `dev` Force.com.
@@ -82,7 +81,7 @@ Execute apex:
   * No parallel executing in case of one CI org.
   * Can deploy the PR to a test org, or developer's can be provided for QA.
 * Merge if all tests pass.
-* Deploy on org(s).
+* Deploy on org(s) manually or hook.
 
 ### Recommended Meta To Sync
 * ApexClass
@@ -115,18 +114,6 @@ Execute apex:
 * Workflow
 * StaticResource
 
-## Demo
-* Register two orgs: `dev` and `prod`.
-* [Connect](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-3-connecting-salesforce-orgs) the orsg.
-* Create a repository `prod`.
-  * Developer makes a fork.
-* Commit initial data.
-* Clone the repository `dev`.
-* Make a PR to `prod`.
-* Deploy the data.
-* Run drone CI `docker-compose -f docker-compose-drone.yml up`.
-* Check the build.
-
 ## Setup [Drone CI](http://docs.drone.io)
 * Configuration for [Bitbucket Cloud](http://docs.drone.io/install-for-bitbucket-cloud/)
 * [ngrok](https://ngrok.com/) can be used for testing on localhost.
@@ -138,14 +125,25 @@ Execute apex:
 * The docker/cumulusCI image is available as `guldmitry/cumulusci`.
 * Add `CUMULUSCI_KEY` in the `Secrets` section for the activated repository.
 
+### Demo
+* Register two orgs: `dev` and `prod`.
+* [Connect](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-3-connecting-salesforce-orgs) the orsg.
+* Create a repository `prod` from the `skeleton` folder.
+  * Developer makes a fork.
+* Commit initial data.
+* Clone the repository `dev`.
+* Make a PR to `prod`.
+* Run drone CI `docker-compose -f docker-compose-drone.yml up`.
+* Check the build.
+* Deploy the data.
+
 ### TODO
 * Deploy on Production workflow.
   * cci flow run ci_master --org prod
-  * cci task run run_tests_debug
+  * cci flow run release_beta --org prod
+  * [Error](https://github.com/SalesforceFoundation/CumulusCI/issues/209) {u'errorCode': u'INVALID_TYPE', u'message': u"sObject type 'MetadataPackage' is not supported."}
   * Currently all release and install flows requires git and falls with
   * Expected to find encrypted file at /root/.cumulusci/Salesforce_Demo_Production/github.org
-  * cci flow run release_beta --org prod
-  * {u'errorCode': u'INVALID_TYPE', u'message': u"sObject type 'MetadataPackage' is not supported."}
 * Insert a flow diagram from Gliffy.
 * Linters: PMD apex, salesforce CI, eslint for lightning, 
 * Demo data\fixtures via anon apex code.
