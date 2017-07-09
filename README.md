@@ -15,11 +15,13 @@ Init new project:
 
 Create a [Connected App](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-3-connecting-salesforce-orgs) and select `Refresh token is valid until revoked` in order to prevent token expiration.
 
-Configure the App:
+Configure the App (add `--project` flag if multiple orgs are used):
 `docker-compose run cumulus cci org config_connected_app`
 
 Connecting an Org (prod):
 `docker-compose run -p 8080:8080 cumulus cci org connect prod`
+
+Test connected org(s): `docker-compose run cumulus cci org info prod`
 
 Or workaround in case of bridge network:
 * `docker-compose run -p 8080:8080 cumulus bash`

@@ -6,7 +6,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - /var/www/salesforce-demo-prod/:/root
+      - /var/www/project-root/:/root
     command: cci
     environment:
         - CUMULUSCI_KEY=2c5409bbc5ea321b # Must be 16
