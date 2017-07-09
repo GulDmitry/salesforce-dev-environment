@@ -8,7 +8,7 @@ First try to set up an environment for Salesforce.
 Override default command:
 `docker-compose run cumulus cci`
 
-Change the volume in `docker-compose.yml`.
+Change volumes in `docker-compose.yml`.
 
 Init new project:
 `docker-compose run cumulus cci project init`
@@ -39,52 +39,14 @@ Execute apex:
 `docker-compose run cumulus cci flow run ci_feature`
 
 ### GIT Flow
-* Make a new `prod` repository.
-* Add a `package.xml` und empty`src` folder.
-* Make a new `dev` org.
-* Clone the repository.
-* Follow `src/package.xml`, deploy the metadata to `dev` Force.com.
-* Make changes and a pull request.
-  * Populate `src/package.xml` with new data, example for class, test and new object:
-      ```
-      src/classes/TestClass.cls
-      src/classes/TestClass.cls-meta.xml
-      src/classes/TestClassTest.cls
-      src/classes/TestClassTest.cls-meta.xml
-      src/objectTranslations/New_Object__c-en_US.objectTranslation
-      src/objects/New_Object__c.object
-      src/layouts/New_Object__c-New Object Layout.layout
-      ```
-      ```xml
-        <types>
-            <members>TestClass</members>
-            <members>TestClassTest</members>
-            <name>ApexClass</name>
-        </types>
-        <types>
-            <members>New_Object__c.String__c</members>
-            <name>CustomField</name>
-        </types>
-        <types>
-            <members>New_Object__c</members>
-            <name>CustomObject</name>
-        </types>
-        <types>
-            <members>New_Object__c-en_US</members>
-            <name>CustomObjectTranslation</name>
-        </types>
-        <types>
-            <members>New_Object__c-New Object Layout</members>
-            <name>Layout</name>
-        </types>
-    ```
-* [CI](http://cumulusci.readthedocs.io/en/latest/cookbook.html#continuous-integration-with-cumulusci): run task and check the files `project/test_results.json`, `project/test_results.xml`.
+* Make a new repository based on `skeleton` folder.
+* Commit meta, see the `src-example` folder.
+* Setup [CI](http://cumulusci.readthedocs.io/en/latest/cookbook.html#continuous-integration-with-cumulusci)
+* Run task and check the files `project/test_results.json`, `project/test_results.xml`.
   * No parallel executing in case of one CI org.
   * Can deploy the PR to a test org, or developer's can be provided for QA.
-* Merge if all tests pass.
-* Deploy on org(s).
 
-### Recommended Meta To Sync
+#### Recommended Meta To Sync
 * ApexClass
 * ApexComponent
 * ApexPage
@@ -115,43 +77,7 @@ Execute apex:
 * Workflow
 * StaticResource
 
-## Demo
-* Register two orgs: `dev` and `prod`.
-* [Connect](http://cumulusci.readthedocs.io/en/latest/tutorial.html#part-3-connecting-salesforce-orgs) the orsg.
-* Create a repository `prod`.
-  * Developer makes a fork.
-* Commit initial data.
-* Clone the repository `dev`.
-* Make a PR to `prod`.
-* Deploy the data.
-* Run drone CI `docker-compose -f docker-compose-drone.yml up`.
-* Check the build.
-
-## Setup [Drone CI](http://docs.drone.io)
-* Configuration for [Bitbucket Cloud](http://docs.drone.io/install-for-bitbucket-cloud/)
-* [ngrok](https://ngrok.com/) can be used for testing on localhost.
-  * `./ngrok http 8081`
-  * Set `DRONE_HOST` in `.env` like `http://{ngrok-hash}.ngrok.io`.
-* Activate a repository.
-* Enable Push and\or Pull request hooks in CI setting.
-* Check created repository hook and add PR support on Create and Update.
-* The docker/cumulusCI image is available as `guldmitry/cumulusci`.
-* Add `CUMULUSCI_KEY` in the `Secrets` section for the activated repository.
-
-### TODO
-* Deploy on Production workflow.
-  * cci flow run ci_master --org prod
-  * cci task run run_tests_debug
-  * Currently all release and install flows requires git and falls with
-  * Expected to find encrypted file at /root/.cumulusci/Salesforce_Demo_Production/github.org
-  * cci flow run release_beta --org prod
-  * {u'errorCode': u'INVALID_TYPE', u'message': u"sObject type 'MetadataPackage' is not supported."}
-* Insert a flow diagram from Gliffy.
-* Linters: PMD apex, salesforce CI, eslint for lightning, 
-* Demo data\fixtures via anon apex code.
-* Try to register a dev org automatically.
-
-#### Commit meta
+#### Examples Provided
 - [x] Custom Object.
 - [x] Custom fields for Custom Object.
 - [x] Apex Class and Test.
@@ -166,3 +92,29 @@ Execute apex:
 - [ ] Master-Detail.
 - [ ] Lookup.
 - [ ] Workflow.
+
+#### Setup [Drone CI](http://docs.drone.io)
+* Configuration for [Bitbucket Cloud](http://docs.drone.io/install-for-bitbucket-cloud/)
+* [ngrok](https://ngrok.com/) can be used for testing on localhost.
+  * `./ngrok http 8081`
+  * Set `DRONE_HOST` in `.env` like `http://{ngrok-hash}.ngrok.io`.
+* Activate a repository.
+* Enable Push and\or Pull request hooks in CI setting.
+* Check created repository hook and add PR support on Create and Update.
+* The docker/cumulusCI image is available as `guldmitry/cumulusci`.
+* Add `CUMULUSCI_KEY` in the `Secrets` section for the activated repository.
+
+### TODO
+* On Dev Org if namespace is set - no tests are executed via `ci_feature`, see the query in logs.
+  * `SELECT Id, Name FROM ApexClass WHERE NamespacePrefix = null AND (Name LIKE '%_TEST%')`
+* Deploy on Production workflow.
+  * cci flow run ci_master --org prod
+  * cci task run run_tests_debug
+  * Currently all release and install flows requires git and falls with
+  * Expected to find encrypted file at /root/.cumulusci/Salesforce_Demo_Production/github.org
+  * cci flow run release_beta --org prod
+  * {u'errorCode': u'INVALID_TYPE', u'message': u"sObject type 'MetadataPackage' is not supported."}
+* Insert a flow diagram from Gliffy.
+* Linters: PMD apex, salesforce CI, eslint for lightning, 
+* Demo data\fixtures via anon apex code.
+* Try to register a dev org automatically.
