@@ -40,10 +40,13 @@ Execute apex:
 
 `docker-compose run cumulus cci flow run ci_feature`
 
+Remove a package: `docker-compose run cumulus cci task run uninstall_packaged`
+
 ### GIT Flow
 * Make a new repository based on `skeleton` folder.
 * Commit meta, see the `src-example` folder.
-* Setup [CI](http://cumulusci.readthedocs.io/en/latest/cookbook.html#continuous-integration-with-cumulusci)
+* Developers can deploy meta manually or `flow run dev_org --org dev`.
+* Setup [CI](http://cumulusci.readthedocs.io/en/latest/cookbook.html#continuous-integration-with-cumulusci).
 * Run task and check the files `project/test_results.json`, `project/test_results.xml`.
   * No parallel executing in case of one CI org.
   * Can deploy the PR to a test org, or developer's can be provided for QA.
